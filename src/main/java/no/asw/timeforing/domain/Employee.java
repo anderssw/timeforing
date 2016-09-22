@@ -1,4 +1,4 @@
-package timeforing.domain;
+package no.asw.timeforing.domain;
 
 
 public class Employee {
