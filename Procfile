@@ -1,1 +1,1 @@
-web: java $JAVA_OPTS -Dserver.port=$PORT -cp target/classes:target/dependency/* Application
+web: java $JAVA_OPTS -Dserver.port=$PORT -cp target/classes:target/dependency/* no.asw.timeforing.Application
