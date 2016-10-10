@@ -1,1 +1,1 @@
-web: java -jar -Dserver.port=$PORT target/timeforing-1.0-SNAPSHOT.jar
+web: java -jar -Dserver.port=$PORT target/timeforing.jar
