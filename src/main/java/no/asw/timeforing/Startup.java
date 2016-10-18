@@ -21,7 +21,7 @@ public class Startup {
     @Autowired
     private RevenueImporter revenueImporter;
 
-    @PostConstruct
+    //@PostConstruct
     public void init() throws URISyntaxException, IOException {
         Path pathToCsvFiles = Paths.get((getClass().getResource("/Revenue Files/").toURI()));
         employeeRepository.deleteAll();

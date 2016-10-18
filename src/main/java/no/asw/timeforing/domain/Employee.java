@@ -27,6 +27,10 @@ public class Employee {
         return billableHours;
     }
 
+    public List<Revenue> getRevenues() {
+        return revenues;
+    }
+
     public String toString() {
         return String.format("Employee[id=%s, billableHours=%s, revenues=%s]", employeeId, billableHours, revenues);
     }
