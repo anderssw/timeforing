@@ -31,14 +31,6 @@ public class Employee {
         return String.format("Employee[id=%s, billableHours=%s, revenues=%s]", employeeId, billableHours, revenues);
     }
 
-    public void addHours(String hours) {
-        try {
-            this.billableHours += Double.parseDouble(hours);
-        } finally {
-            return;
-        }
-    }
-
     public void addRevenue(Revenue revenue){
         this.revenues.add(revenue);
         this.billableHours += revenue.getBillableHours();
