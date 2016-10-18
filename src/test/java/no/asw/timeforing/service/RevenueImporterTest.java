@@ -23,7 +23,7 @@ public class RevenueImporterTest {
     @Test
     public void testThatCSVFileCanBeImported() throws IOException, URISyntaxException {
 
-        Path path = Paths.get(getClass().getResource("/Revenue Files/Konsulentomsetning 2016.csv").toURI());
+        Path path = Paths.get(getClass().getResource("/Revenue Files/september.csv").toURI());
 
         importer.importFromFile(path);
 

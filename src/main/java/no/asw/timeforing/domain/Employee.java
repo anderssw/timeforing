@@ -2,6 +2,7 @@ package no.asw.timeforing.domain;
 
 import org.springframework.data.annotation.Id;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Employee {
@@ -9,7 +10,7 @@ public class Employee {
     @Id
     private Long employeeId;
     private double billableHours;
-    private List<RevenueInformation> revenue;
+    private List<Revenue> revenues = new ArrayList<>();
 
     public Employee(){}
 
@@ -27,7 +28,7 @@ public class Employee {
     }
 
     public String toString() {
-        return String.format("Employee[id=%s, billableHours=%s, revenue=%s]", employeeId, billableHours, revenue);
+        return String.format("Employee[id=%s, billableHours=%s, revenues=%s]", employeeId, billableHours, revenues);
     }
 
     public void addHours(String hours) {
@@ -38,7 +39,8 @@ public class Employee {
         }
     }
 
-    public void addRevenueInformation(RevenueInformation revenueInformation){
-        revenue.add(revenueInformation);
+    public void addRevenue(Revenue revenue){
+        this.revenues.add(revenue);
+        this.billableHours += revenue.getBillableHours();
     }
 }

@@ -1,43 +1,43 @@
 package no.asw.timeforing.domain;
 
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import no.asw.timeforing.domain.csv.RevenueLine;
 
-@JsonPropertyOrder({"employeeId", "departmentId", "name", "revenue", "prognosis", "discrepancy","discrepancyInPercent", "billableHours", "utilization" })
+import java.time.Month;
+
 public class Revenue {
 
-    /* Id	Avdeling	 Navn 	Omsetning	 Pro./Run-Ons 	Avvik	%-avvik	F-timer	Utf.grad */
-    Long employeeId;
-    String departmentId;
-    String name;
-    String revenue;
-    String prognosis;
-    String discrepancy;
-    String discrepancyInPercent;
-    String billableHours;
-    String utilization;
+    private Month month;
+    private Double billableHours;
+    private String revenue;
+    private String prognosis;
+    private String utilization;
 
-    public Long getEmployeeId() {
-        return employeeId;
+    public Revenue(RevenueLine revenueLineFromFile) {
+        this.billableHours = revenueLineFromFile.getBillableHoursAsDouble();
+        this.revenue = revenueLineFromFile.getRevenue().trim();
+        this.prognosis = revenueLineFromFile.getRevenue().trim();
+        this.utilization = revenueLineFromFile.getUtilization();
     }
 
-    public void setEmployeeId(Long employeeId) {
-        this.employeeId = employeeId;
+    public Revenue(RevenueLine revenueLine, Month monthFromFileName) {
+        this(revenueLine);
+        this.month = monthFromFileName;
     }
 
-    public String getDepartmentId() {
-        return departmentId;
+    public Month getMonth() {
+        return month;
     }
 
-    public void setDepartmentId(String departmentId) {
-        this.departmentId = departmentId;
+    public void setMonth(Month month) {
+        this.month = month;
     }
 
-    public String getName() {
-        return name;
+    public Double getBillableHours() {
+        return billableHours;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setBillableHours(Double billableHours) {
+        this.billableHours = billableHours;
     }
 
     public String getRevenue() {
@@ -56,43 +56,22 @@ public class Revenue {
         this.prognosis = prognosis;
     }
 
-    public String getDiscrepancy() {
-        return discrepancy;
-    }
-
-    public void setDiscrepancy(String discrepancy) {
-        this.discrepancy = discrepancy;
-    }
-
-    public String getDiscrepancyInPercent() {
-        return discrepancyInPercent;
-    }
-
-    public void setDiscrepancyInPercent(String discrepancyInPercent) {
-        this.discrepancyInPercent = discrepancyInPercent;
-    }
-
-    public String getBillableHours() {
-        return billableHours;
-    }
-
-    public Double getBillableHoursAsDouble() {
-        try {
-            return Double.parseDouble(billableHours);
-        } finally {
-            return Double.NaN;
-        }
-    }
-
-    public void setBillableHours(String billableHours) {
-        this.billableHours = billableHours;
-    }
-
     public String getUtilization() {
         return utilization;
     }
 
     public void setUtilization(String utilization) {
         this.utilization = utilization;
+    }
+
+    @Override
+    public String toString() {
+        return "Revenue[" +
+                "month=" + month +
+                ", billableHours=" + billableHours +
+                ", revenue=" + revenue +
+                ", prognosis=" + prognosis +
+                ", utilization='" + utilization + '\'' +
+                ']';
     }
 }
