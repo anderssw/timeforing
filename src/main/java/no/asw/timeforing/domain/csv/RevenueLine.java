@@ -1,5 +1,6 @@
 package no.asw.timeforing.domain.csv;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonPropertyOrder({"employeeId", "departmentId", "name", "revenue", "prognosis", "discrepancy","discrepancyInPercent", "billableHours", "utilization" })
@@ -76,6 +77,7 @@ public class RevenueLine {
         return billableHours;
     }
 
+    @JsonIgnore
     public Double getBillableHoursAsDouble() {
         try {
             String hours = billableHours.replace(',', '.').trim();
