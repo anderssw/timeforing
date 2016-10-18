@@ -1,4 +1,4 @@
-package no.asw.timeforing.service;
+package no.asw.timeforing.service.csv;
 
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
@@ -59,5 +59,4 @@ public class RevenueImporter {
         String month = fileName.toString().replace(".csv","").toUpperCase();
         return Month.valueOf(month);
     }
-
 }
