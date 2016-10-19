@@ -3,13 +3,12 @@ package no.asw.timeforing.domain.csv;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-@JsonPropertyOrder({"employeeId", "departmentId", "name", "revenue", "prognosis", "discrepancy","discrepancyInPercent", "billableHours", "utilization" })
+@JsonPropertyOrder({"employeeId", "departmentId", "revenue", "prognosis", "discrepancy","discrepancyInPercent", "billableHours", "utilization" })
 public class RevenueLine {
 
     /* Id	Avdeling	 Navn 	Omsetning	 Pro./Run-Ons 	Avvik	%-avvik	F-timer	Utf.grad */
     Long employeeId;
     String departmentId;
-    String name;
     String revenue;
     String prognosis;
     String discrepancy;
@@ -31,14 +30,6 @@ public class RevenueLine {
 
     public void setDepartmentId(String departmentId) {
         this.departmentId = departmentId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getRevenue() {
