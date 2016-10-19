@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @JsonPropertyOrder({"employeeId", "departmentId", "revenue", "prognosis", "discrepancy","discrepancyInPercent", "billableHours", "utilization" })
 public class RevenueLine {
 
-    /* Id	Avdeling	 Navn 	Omsetning	 Pro./Run-Ons 	Avvik	%-avvik	F-timer	Utf.grad */
+    /* Id	Avdeling    Omsetning	 Pro./Run-Ons 	Avvik	%-avvik	F-timer	Utf.grad */
     Long employeeId;
     String departmentId;
     String revenue;
@@ -89,4 +89,5 @@ public class RevenueLine {
     public void setUtilization(String utilization) {
         this.utilization = utilization;
     }
+
 }
