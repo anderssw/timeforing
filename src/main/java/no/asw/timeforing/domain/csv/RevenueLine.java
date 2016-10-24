@@ -3,6 +3,8 @@ package no.asw.timeforing.domain.csv;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
+import java.math.BigDecimal;
+
 @JsonPropertyOrder({"employeeId", "departmentId", "revenue", "prognosis", "discrepancy","discrepancyInPercent", "billableHours", "utilization" })
 public class RevenueLine {
 
@@ -90,4 +92,12 @@ public class RevenueLine {
         this.utilization = utilization;
     }
 
+    public Double getUtilizationAsDouble() {
+        try {
+            String util = utilization.replace(',', '.').replace("%","").trim();
+            return Double.parseDouble(util);
+        } catch (Exception e) {
+            return 0.;
+        }
+    }
 }

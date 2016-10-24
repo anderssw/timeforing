@@ -28,7 +28,7 @@ public class Startup {
 
     //@PostConstruct
     public void init() throws URISyntaxException, IOException {
-        Path pathToCsvFiles = Paths.get((getClass().getResource("/Revenue Files/").toURI()));
+        Path pathToCsvFiles = Paths.get((getClass().getResource("/data/").toURI()));
         employeeRepository.deleteAll();
 
         Files.newDirectoryStream(pathToCsvFiles).forEach(file -> {
