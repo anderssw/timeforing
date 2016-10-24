@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-@JsonPropertyOrder({"employeeId","billableHoursTotal","averageUtilization", "revenuePerMonth"})
+@JsonPropertyOrder({"employeeId","billableHoursTotal","averageUtilizationPercent", "revenuePerMonth"})
 public class Employee {
 
     @Id
