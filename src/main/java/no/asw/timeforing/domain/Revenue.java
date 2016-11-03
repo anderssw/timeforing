@@ -12,7 +12,7 @@ public class Revenue {
     private Double billableHours;
     private String revenue;
     private String prognosis;
-    private String utilization;
+    private Double utilization;
 
     public Revenue() { }
 
@@ -20,7 +20,7 @@ public class Revenue {
         this.billableHours = revenueLineFromFile.getBillableHoursAsDouble();
         this.revenue = revenueLineFromFile.getRevenue().trim();
         this.prognosis = revenueLineFromFile.getPrognosis().trim();
-        this.utilization = revenueLineFromFile.getUtilization();
+        this.utilization = revenueLineFromFile.getUtilizationAsDouble();
     }
 
     public Revenue(RevenueLine revenueLine, Month monthFromFileName) {
@@ -44,7 +44,7 @@ public class Revenue {
         return prognosis;
     }
 
-    public String getUtilization() {
+    public Double getUtilization() {
         return utilization;
     }
 
