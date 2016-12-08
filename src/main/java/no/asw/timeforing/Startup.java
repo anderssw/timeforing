@@ -26,7 +26,7 @@ public class Startup {
 
     Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    //@PostConstruct
+    @PostConstruct
     public void init() throws URISyntaxException, IOException {
         Path pathToCsvFiles = Paths.get((getClass().getResource("/data/").toURI()));
         employeeRepository.deleteAll();
