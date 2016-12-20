@@ -34,7 +34,7 @@ public class Startup {
 
     @PostConstruct
     public void init() throws URISyntaxException, IOException {
-        //employeeRepository.deleteAll();
+        employeeRepository.deleteAll();
 
         importProjectData();
         importRevenueData();
