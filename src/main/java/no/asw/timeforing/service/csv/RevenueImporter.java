@@ -49,7 +49,7 @@ public class RevenueImporter extends AbstractImporter<RevenueLine> {
     }
 
     private Employee createNewEmployeeFromRevenue(RevenueLine revenueLine) {
-        Employee employee = new Employee(revenueLine.getEmployeeId(), 0);
+        Employee employee = new Employee(revenueLine.getEmployeeId());
         return employee;
     }
 

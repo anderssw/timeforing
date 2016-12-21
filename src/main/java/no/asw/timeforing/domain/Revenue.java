@@ -1,15 +1,15 @@
 package no.asw.timeforing.domain;
 
+import no.asw.timeforing.domain.csv.ProjectLine;
 import no.asw.timeforing.domain.csv.RevenueLine;
 
 import java.time.Month;
-import java.time.format.TextStyle;
-import java.util.Locale;
 
-public class Revenue {
+public class Revenue implements Comparable<Revenue>{
 
     private Month month;
-    private Double billableHours;
+    private Double customerBillableHours;
+    private Double allBillableHours;
     private String revenue;
     private String prognosis;
     private Double utilization;
@@ -17,7 +17,7 @@ public class Revenue {
     public Revenue() { }
 
     public Revenue(RevenueLine revenueLineFromFile) {
-        this.billableHours = revenueLineFromFile.getBillableHoursAsDouble();
+        this.customerBillableHours = revenueLineFromFile.getBillableHoursAsDouble();
         this.revenue = revenueLineFromFile.getRevenue().trim();
         this.prognosis = revenueLineFromFile.getPrognosis().trim();
         this.utilization = revenueLineFromFile.getUtilizationAsDouble();
@@ -32,8 +32,8 @@ public class Revenue {
         return month;
     }
 
-    public Double getBillableHours() {
-        return billableHours;
+    public Double getCustomerBillableHours() {
+        return customerBillableHours;
     }
 
     public String getRevenue() {
@@ -48,14 +48,30 @@ public class Revenue {
         return utilization;
     }
 
+    public Double getAllBillableHours() {
+        return allBillableHours;
+    }
+
+    public void addProjectHours(ProjectLine project, Month month){
+        if(this.month.equals(month)) {
+            allBillableHours = project.getHoursAsDouble();
+        }
+    }
+
     @Override
     public String toString() {
         return "Revenue[" +
                 "month=" + month +
-                ", billableHours=" + billableHours +
+                ", customerBillableHours=" + customerBillableHours +
+                ", allBillableHours=" + allBillableHours +
                 ", revenue=" + revenue +
                 ", prognosis=" + prognosis +
                 ", utilization='" + utilization + '\'' +
                 ']';
+    }
+
+    @Override
+    public int compareTo(Revenue other) {
+        return other.getMonth().compareTo(getMonth());
     }
 }
