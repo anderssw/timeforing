@@ -8,11 +8,11 @@ import java.time.Month;
 public class Revenue implements Comparable<Revenue>{
 
     private Month month;
-    private Double customerBillableHours;
-    private Double allBillableHours;
+    private double customerBillableHours;
+    private double allBillableHours;
     private String revenue;
     private String prognosis;
-    private Double utilization;
+    private double utilization;
 
     public Revenue() { }
 
@@ -32,7 +32,7 @@ public class Revenue implements Comparable<Revenue>{
         return month;
     }
 
-    public Double getCustomerBillableHours() {
+    public double getCustomerBillableHours() {
         return customerBillableHours;
     }
 
@@ -44,18 +44,16 @@ public class Revenue implements Comparable<Revenue>{
         return prognosis;
     }
 
-    public Double getUtilization() {
+    public double getUtilization() {
         return utilization;
     }
 
-    public Double getAllBillableHours() {
+    public double getAllBillableHours() {
         return allBillableHours;
     }
 
-    public void addProjectHours(ProjectLine project, Month month){
-        if(this.month.equals(month)) {
-            allBillableHours = project.getHoursAsDouble();
-        }
+    public void addProjectHours(ProjectLine project){
+        allBillableHours = project.getHoursAsDouble();
     }
 
     @Override
