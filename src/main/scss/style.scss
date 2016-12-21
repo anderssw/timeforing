@@ -1,0 +1,26 @@
+body {
+    background-color: purple;
+    font-size: 14px;
+}
+
+.employeeInput{
+    margin: 0 auto;
+    display: block;
+    padding: 15px;
+    font-size: 1.3em;
+    text-align: center;
+}
+
+button{
+    border: none;
+    padding: 6px 15px;
+    margin: 15px auto 0px auto;
+    display: block;
+    cursor: pointer;
+}
+
+
+.btn-primary{
+    background-color: blue;
+    font-size: 1.1em;
+}

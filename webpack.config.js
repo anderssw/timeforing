@@ -1,8 +1,12 @@
 var path = require('path');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
     entry: './src/main/js/app.js',
     devtool: 'sourcemaps',
+    plugins: [
+    new ExtractTextPlugin('[name].css'),
+    ],
     cache: true,
     debug: true,
     output: {
@@ -11,15 +15,22 @@ module.exports = {
     },
     module: {
         loaders: [
-            {
-                test: path.join(__dirname, '.'),
-                exclude: /(node_modules)/,
-                loader: 'babel',
-                query: {
-                    cacheDirectory: true,
-                    presets: ['es2015', 'react']
-                }
-            }
-        ]
+        {
+         test: /\.scss$/,
+         loaders: ['style','css','sass']
+     },
+     {
+        test: /\.js$/,
+        exclude: /(node_modules)/,
+        loader: 'babel',
+        query: {
+            cacheDirectory: true,
+            presets: ['es2015', 'react']
+        }
     }
+
+
+    ]
+}
 };
+
