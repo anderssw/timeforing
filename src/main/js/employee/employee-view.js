@@ -1,10 +1,12 @@
 import React from 'react';
+import EmployeeSummaryRow from './employee-summary-row'
+import EmployeeMonthRow from './employee-month-row'
 
 export default class EmployeeView extends React.Component {
 
 	constructor(){
 		super();
-		this.state = {employee: null}
+		this.state = {employee: {revenuesForCurrentYear: []}}
 		this.getEmployeeData = this.getEmployeeData.bind(this);
 	}
 
@@ -23,10 +25,12 @@ export default class EmployeeView extends React.Component {
 
 	render(){
 		return (
-			<div>
-				{this.state.employee ?  this.state.employee.billableHoursTotal : "test"}
-				<input type="text" placeholder="52100..." className="employeeInput" />
-				<button className="btn-primary">Hent timer</button>
+			<div className = "employeeView">
+			    <EmployeeSummaryRow employee={this.state.employee}></EmployeeSummaryRow>
+			    {this.state.employee.revenuesForCurrentYear.map(function(revenue){
+                    return <EmployeeMonthRow key={revenue.month} revenue={revenue}/>
+                })
+                }
 			</div>
 			)
 	}
