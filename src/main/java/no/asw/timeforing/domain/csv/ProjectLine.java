@@ -2,6 +2,8 @@ package no.asw.timeforing.domain.csv;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
+import java.time.Month;
+
 @JsonPropertyOrder({"employeeId", "hours" })
 public class ProjectLine {
 

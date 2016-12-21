@@ -1,9 +1,10 @@
 package no.asw.timeforing.domain;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import no.asw.timeforing.domain.csv.ProjectLine;
 import org.springframework.data.annotation.Id;
 
-import java.math.BigDecimal;
+import java.time.Month;
 import java.time.Year;
 import java.util.*;
 
@@ -15,14 +16,12 @@ public class Employee {
     private double billableHoursTotal;
     private double utilizationTotal;
 
-    private Map<Integer, List<Revenue>> revenuePerYear = new HashMap<>();
-    private Map<Integer, List<Project>> projectPerYear = new HashMap<>();
+    private NavigableMap<Integer, SortedSet<Revenue>> revenuePerYear = new TreeMap<>();
 
-    public Employee(){}
+    public Employee() {}
 
-    public Employee(Long employeeId, double billableHoursTotal) {
+    public Employee(Long employeeId) {
         this.employeeId = employeeId;
-        this.billableHoursTotal = billableHoursTotal;
     }
 
     public Long getEmployeeId() {
@@ -34,34 +33,33 @@ public class Employee {
     }
 
     public String toString() {
-        return String.format("Employee[id=%s, billableHoursTotal=%s, revenuePerYear=%s, projectPerYear=%s]", employeeId, billableHoursTotal, revenuePerYear, projectPerYear);
-    }
-
-    public void addProject(Project project, Year year) {
-        List<Project> projects = projectPerYear.get(year.getValue());
-        if(projects == null){
-            projects = new ArrayList<>();
-            projectPerYear.put(year.getValue(), projects);
-        }
-        projects.add(project);
+        return String.format("Employee[id=%s, billableHoursTotal=%s, revenuePerYear=%s]", employeeId, billableHoursTotal, revenuePerYear);
     }
 
     public void addRevenue(Revenue revenue, Year year) {
-        List<Revenue> revenues = revenuePerYear.get(year.getValue());
+        SortedSet<Revenue> revenues = revenuePerYear.get(year.getValue());
         if(revenues == null){
-            revenues = new ArrayList<>();
+            revenues = new TreeSet<>();
             revenuePerYear.put(year.getValue(), revenues);
         }
         revenues.add(revenue);
     }
 
-    public Map<Integer, List<Revenue>> getRevenuePerYear() {
+    public void addProjectHours(ProjectLine projectLine, Year year, Month month) {
+        SortedSet<Revenue> revenues = revenuePerYear.get(year.getValue());
+        if(revenues == null){ return; }
+        revenues.forEach(revenue -> revenue.addProjectHours(projectLine, month));
+    }
+
+    public Map<Integer, SortedSet<Revenue>> getRevenuePerYear() {
         return revenuePerYear;
     }
 
-    public Map<Integer, List<Project>> getProjectPerYear() {
-        return projectPerYear;
+    public SortedSet<Revenue> getRevenuesForCurrentYear() {
+        if(revenuePerYear.lastEntry() == null) return new TreeSet<>();
+        return revenuePerYear.lastEntry().getValue();
     }
+
 
     /*
         //TODO: kalkuler ved import?
@@ -69,19 +67,6 @@ public class Employee {
             return new BigDecimal(utilizationTotal/revenuePerMonth.size()).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
         }
 
-        //TODO:: lag comparator på klassenivå
-        public List<Revenue> getRevenuePerMonth() {
-            revenuePerMonth.sort(Comparator.comparing((Revenue revenue) -> revenue.getMonth().getValue()).reversed());
-            return revenuePerMonth;
-        }
-
-        //TODO:: ta høyde for år
-        public void addRevenue(Revenue revenue){
-            this.revenuePerMonth.add(revenue);
-            this.billableHoursTotal += revenue.getBillableHours();
-            this.utilizationTotal += revenue.getUtilization();
-        }
     */
-
 
 }

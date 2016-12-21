@@ -36,8 +36,8 @@ public class Startup {
     public void init() throws URISyntaxException, IOException {
         employeeRepository.deleteAll();
 
-        importProjectData();
         importRevenueData();
+        importProjectData();
     }
 
     private void importProjectData() throws URISyntaxException, IOException {

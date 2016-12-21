@@ -1,7 +1,6 @@
 package no.asw.timeforing.service.csv;
 
 import no.asw.timeforing.domain.Employee;
-import no.asw.timeforing.domain.Project;
 import no.asw.timeforing.domain.csv.ProjectLine;
 import no.asw.timeforing.repository.EmployeeRepository;
 import no.asw.timeforing.utils.FilenameUtil;
@@ -39,26 +38,15 @@ public class ProjectImporter extends AbstractImporter<ProjectLine> {
 
     private void updateEmployee(ProjectLine projectLine, Year year, Month month) {
         Employee employee = employeeRepository.findOne(projectLine.getEmployeeId());
-        if(employee == null) employee = createNewEmployee(projectLine.getEmployeeId());
-        Project project = createProjectFromProjectLine(projectLine, month);
-        employee.addProject(project, year);
+        if(employee == null) return;
+        employee.addProjectHours(projectLine, year, month);
         employeeRepository.save(employee);
     }
 
 
     private Employee createNewEmployee(Long employeeId) {
-        Employee employee = new Employee(employeeId, 0);
+        Employee employee = new Employee(employeeId);
         return employee;
     }
-
-    private Project createProjectFromProjectLine(ProjectLine projectLine, Month month) {
-        return new Project(projectLine, month);
-    }
-
-    private Month getMonthFromFileName(Path fileName) {
-        String month = fileName.toString().replace(".csv","").toUpperCase();
-        return Month.valueOf(month);
-    }
-
 }
 
