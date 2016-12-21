@@ -3,8 +3,6 @@ package no.asw.timeforing;
 import no.asw.timeforing.repository.EmployeeRepository;
 import no.asw.timeforing.service.csv.ProjectImporter;
 import no.asw.timeforing.service.csv.RevenueImporter;
-import no.asw.timeforing.utils.FilenameUtil;
-import org.hibernate.validator.internal.util.logging.Log_$logger;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +14,6 @@ import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.time.Year;
 
 @Service
 public class Startup {
@@ -45,7 +42,7 @@ public class Startup {
         Path pathToCsvFiles = Paths.get(getClass().getResource("/data/project").toURI());
         Files.newDirectoryStream(pathToCsvFiles).forEach(years -> {
             try {
-                Files.newDirectoryStream(years).forEach(file -> projectImporter.importFile(file));
+                Files.newDirectoryStream(years).forEach(projectImporter::importFile);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -58,7 +55,7 @@ public class Startup {
         Path pathToCsvFiles = Paths.get(getClass().getResource("/data/revenue").toURI());
         Files.newDirectoryStream(pathToCsvFiles).forEach(years -> {
             try {
-                Files.newDirectoryStream(years).forEach(file -> revenueImporter.importFile(file));
+                Files.newDirectoryStream(years).forEach(revenueImporter::importFile);
             } catch (IOException e) {
                 e.printStackTrace();
             }
