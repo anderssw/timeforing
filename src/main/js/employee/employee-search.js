@@ -13,12 +13,8 @@ export default class EmployeeSearch extends React.Component {
         this.setState({
             employeeNumber: evt.target.value
         });
-
-        console.log(this.state);
     }
     buttonClicked(evt){
-        console.log(this.state);
-        debugger;
         this.props.router.push('/employee/' + this.state.employeeNumber);
     }
 
