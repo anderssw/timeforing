@@ -82,6 +82,10 @@ button{
     font-size: 1.4em;
     padding: 12px 10px;
     background-color: cadetblue;
+
+    @media screen and(max-width: 400px){
+        font-size: 1em;
+    }
 }
 
 .employeeMonthRow{
