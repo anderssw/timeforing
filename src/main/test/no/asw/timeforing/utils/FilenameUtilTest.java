@@ -12,7 +12,7 @@ public class FilenameUtilTest {
     @Test
     public void testThatYearIsFound(){
         Path path = Paths.get("/data/project/2016/enfinfil.csv");
-        Year year = FilenameUtil.getYearFromFileName(path);
+        Year year = FilenameUtil.getYearFromFilePath(path);
         Assert.assertTrue(year.equals(Year.of(2016)));
     }
 

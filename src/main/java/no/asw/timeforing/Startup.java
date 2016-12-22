@@ -37,6 +37,18 @@ public class Startup {
         importProjectData();
     }
 
+    private void importRevenueData() throws URISyntaxException, IOException{
+        logger.info("Importing revenue data");
+        Path pathToCsvFiles = Paths.get(getClass().getResource("/data/revenue").toURI());
+        Files.newDirectoryStream(pathToCsvFiles).forEach(years -> {
+            try {
+                Files.newDirectoryStream(years).forEach(revenueImporter::importFile);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
     private void importProjectData() throws URISyntaxException, IOException {
         logger.info("Importing project data");
         Path pathToCsvFiles = Paths.get(getClass().getResource("/data/project").toURI());
@@ -48,17 +60,5 @@ public class Startup {
             }
         });
 
-    }
-
-    private void importRevenueData() throws URISyntaxException, IOException{
-        logger.info("Importing revenue data");
-        Path pathToCsvFiles = Paths.get(getClass().getResource("/data/revenue").toURI());
-        Files.newDirectoryStream(pathToCsvFiles).forEach(years -> {
-            try {
-                Files.newDirectoryStream(years).forEach(revenueImporter::importFile);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
     }
 }

@@ -38,13 +38,21 @@ public class Employee {
 
     public void addProjectHours(ProjectLine projectLine, Year year, Month month) {
         SortedSet<Revenue> revenues = revenuePerYear.get(year.getValue());
-        if(revenues == null){ return; }
-        revenues.forEach(revenue -> {
-            if (revenue.getMonth().equals(month)) {
-                revenue.addProjectHours(projectLine);
-                addAggregates(revenue, year);
-            }
-        });
+
+        if(revenues == null){
+            revenues = new TreeSet<>();
+            Revenue emptyRevenue = new Revenue();
+            emptyRevenue.setMonth(month);
+            revenues.add(emptyRevenue);
+            revenuePerYear.put(year.getValue(), revenues);
+        }
+
+        Optional<Revenue> revenue = revenues.stream().filter(elem -> elem.getMonth().equals(month)).findFirst();
+
+        if(revenue.isPresent()) {
+            revenue.get().addProjectHours(projectLine);
+            addAggregates(revenue.get(), year);
+        }
     }
 
     private void addAggregates(Revenue revenue, Year year) {

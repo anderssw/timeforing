@@ -30,7 +30,7 @@ public class ProjectImporter extends AbstractImporter<ProjectLine> {
         }
 
         Month month = FilenameUtil.getMonthFromFileName(path.getFileName());
-        Year year = FilenameUtil.getYearFromFileName(path);
+        Year year = FilenameUtil.getYearFromFilePath(path);
 
         projectLines.forEach(line -> updateEmployee(line, year, month));
         return false;
@@ -38,11 +38,10 @@ public class ProjectImporter extends AbstractImporter<ProjectLine> {
 
     private void updateEmployee(ProjectLine projectLine, Year year, Month month) {
         Employee employee = employeeRepository.findOne(projectLine.getEmployeeId());
-        if(employee == null) return;
+        if(employee == null) employee = createNewEmployee(projectLine.getEmployeeId());
         employee.addProjectHours(projectLine, year, month);
         employeeRepository.save(employee);
     }
-
 
     private Employee createNewEmployee(Long employeeId) {
         Employee employee = new Employee(employeeId);
