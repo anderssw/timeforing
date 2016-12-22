@@ -1,5 +1,4 @@
 var path = require('path');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var webpack = require('webpack');
 
 module.exports = {
@@ -11,7 +10,6 @@ module.exports = {
           "jQuery":"jquery",
           "window.jQuery":"jquery"
         }),
-      new ExtractTextPlugin('[name].css'),
     ],
     cache: true,
     debug: true,
