@@ -29,7 +29,7 @@ export default class EmployeeView extends React.Component {
 	render(){
 		return (
 			<div>
-			<div className="mtHeader">MineTimer</div>
+			<div className="mtHeader"></div>
 			<div className = "employeeView">
 			    <EmployeeSummaryRow employee={this.state.employee}></EmployeeSummaryRow>
 			 <PanelGroup defaultActiveKey="2" accordion>
@@ -39,7 +39,7 @@ export default class EmployeeView extends React.Component {
 			 				<div>{revenue.allBillableHours + "h"}</div>
 			 				<div>
 			 				    <div>Revenue: {revenue.revenue}</div>
-			 				    <div>Prognose: {revenue.prognosis}</div>
+			 				    <div>Prognosis: {revenue.prognosis}</div>
 			 				    <div>Utilization: {revenue.utilization}</div>
 			 			    </div>
 

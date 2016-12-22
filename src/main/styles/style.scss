@@ -18,6 +18,10 @@ body{
     text-align: center;
     font-size: 4em;
     color: purple;
+
+    &:before{
+        content: "Mine timer";
+    }
 }
 
 #react {
