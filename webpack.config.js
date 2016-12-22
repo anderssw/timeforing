@@ -1,11 +1,17 @@
 var path = require('path');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var webpack = require('webpack');
 
 module.exports = {
     entry: './src/main/js/app.js',
     devtool: 'sourcemaps',
     plugins: [
-    new ExtractTextPlugin('[name].css'),
+    new webpack.ProvidePlugin({
+          "$":"jquery",
+          "jQuery":"jquery",
+          "window.jQuery":"jquery"
+        }),
+      new ExtractTextPlugin('[name].css'),
     ],
     cache: true,
     debug: true,

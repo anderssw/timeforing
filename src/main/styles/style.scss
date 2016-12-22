@@ -1,0 +1,77 @@
+@import "~bootstrap-sass/assets/stylesheets/bootstrap-sprockets";
+@import "../styles/bootstrap/bootstrap";
+
+body{
+    text-align: center;
+}
+
+.panel-heading{
+ a {
+    cursor: pointer;
+    display: block;
+ }
+}
+
+.mtHeader{
+    text-align: center;
+    font-size: 4em;
+    color: purple;
+}
+
+#react {
+    font-size: 14px;
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.employeeInput{
+    margin: 0 auto;
+    display: block;
+    padding: 15px;
+    font-size: 1.3em;
+    text-align: center;
+}
+
+.panel-group {
+    .panel + .panel {
+        margin-top: 0px;
+    }
+    .panel-default{
+        border-radius: 0;
+    }
+
+}
+
+
+.totalRevenue{
+    float: right;
+}
+
+button{
+    border: none;
+    padding: 6px 15px;
+    margin: 15px auto 0px auto;
+    display: block;
+    cursor: pointer;
+}
+
+.employeeView{
+    margin: 0 auto;
+}
+
+.employeeSummary{
+    font-size: 1.4em;
+    padding: 12px 10px;
+    background-color: cadetblue;
+}
+
+.employeeMonthRow{
+    padding: 10px 10px;
+    border: 1px solid;
+}
+
+.btn-primary{
+    background-color: blue;
+    font-size: 1.1em;
+}

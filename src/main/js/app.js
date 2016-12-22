@@ -3,7 +3,9 @@ import ReactDOM from 'react-dom';
 import { Router, Route, IndexRoute, Link, hashHistory } from 'react-router'
 import EmployeeSearch from './employee/employee-search'
 import EmployeeView from './employee/employee-view'
-require('../scss/style.scss');
+require('../styles/style.scss');
+require("bootstrap-sass");
+var $ = require("jquery");
 
 export default class App extends React.Component {
 
