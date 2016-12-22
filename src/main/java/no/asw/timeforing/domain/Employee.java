@@ -8,15 +8,14 @@ import java.time.Month;
 import java.time.Year;
 import java.util.*;
 
-@JsonPropertyOrder({"employeeId","billableHoursTotal", "revenuesPerYear"})
+@JsonPropertyOrder({"employeeId","aggregatesForCurrentYear", "revenuesForCurrentYear"})
 public class Employee {
 
     @Id
     private Long employeeId;
-    private double billableHoursTotal;
-    private double utilizationTotal;
 
     private NavigableMap<Integer, SortedSet<Revenue>> revenuePerYear = new TreeMap<>();
+    private NavigableMap<Integer, Aggregates> aggregatesPerYear = new TreeMap<>();
 
     public Employee() {}
 
@@ -26,14 +25,6 @@ public class Employee {
 
     public Long getEmployeeId() {
         return employeeId;
-    }
-
-    public double getBillableHoursTotal() {
-        return billableHoursTotal;
-    }
-
-    public String toString() {
-        return String.format("Employee[id=%s, billableHoursTotal=%s, revenuePerYear=%s]", employeeId, billableHoursTotal, revenuePerYear);
     }
 
     public void addRevenue(Revenue revenue, Year year) {
@@ -48,7 +39,21 @@ public class Employee {
     public void addProjectHours(ProjectLine projectLine, Year year, Month month) {
         SortedSet<Revenue> revenues = revenuePerYear.get(year.getValue());
         if(revenues == null){ return; }
-        revenues.forEach(revenue -> revenue.addProjectHours(projectLine, month));
+        revenues.forEach(revenue -> {
+            if (revenue.getMonth().equals(month)) {
+                revenue.addProjectHours(projectLine);
+                addAggregates(revenue, year);
+            }
+        });
+    }
+
+    private void addAggregates(Revenue revenue, Year year) {
+        Aggregates aggregates = aggregatesPerYear.get(year.getValue());
+        if(aggregates == null) {
+            aggregates = new Aggregates();
+            aggregatesPerYear.put(year.getValue(), aggregates);
+        }
+        aggregates.aggregateInfoFrom(revenue);
     }
 
     public Map<Integer, SortedSet<Revenue>> getRevenuePerYear() {
@@ -60,13 +65,17 @@ public class Employee {
         return revenuePerYear.lastEntry().getValue();
     }
 
+    public NavigableMap<Integer, Aggregates> getAggregatesPerYear() {
+        return aggregatesPerYear;
+    }
 
-    /*
-        //TODO: kalkuler ved import?
-        public Double getAverageUtilizationPercent(){
-            return new BigDecimal(utilizationTotal/revenuePerMonth.size()).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
-        }
+    public Aggregates getAggregatesForCurrentYear(){
+        if(aggregatesPerYear.lastEntry() == null) return new Aggregates();
+        return aggregatesPerYear.lastEntry().getValue();
+    }
 
-    */
+    public String toString() {
+        return String.format("Employee[id=%s, revenuePerYear=%s, aggregatesPerYear=%s]", employeeId, revenuePerYear, aggregatesPerYear);
+    }
 
 }
