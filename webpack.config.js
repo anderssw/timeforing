@@ -1,12 +1,8 @@
 var path = require('path');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
     entry: './src/main/js/app.js',
     devtool: 'sourcemaps',
-    plugins: [
-    new ExtractTextPlugin('[name].css'),
-    ],
     cache: true,
     debug: true,
     output: {
