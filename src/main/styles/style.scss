@@ -3,10 +3,12 @@
 
 body{
     text-align: center;
+    font-size: 14px;
 }
 
 .panel-heading{
  a {
+    font-size: 1.5em;
     cursor: pointer;
     display: block;
     text-transform: capitalize;
@@ -16,7 +18,7 @@ body{
 .mtHeader{
     margin: 15px;
     text-align: center;
-    font-size: 4em;
+    font-size: 5em;
     color: purple;
 
     &:before{
@@ -25,8 +27,8 @@ body{
 }
 
 #react {
-    font-size: 14px;
-    max-width: 700px;
+    max-width: 1000px;
+    width: 100%;
     margin: 0 auto;
     text-align: left;
 }
@@ -35,7 +37,7 @@ body{
     margin: 0 auto;
     display: block;
     padding: 15px;
-    font-size: 1.3em;
+    font-size: 2.3em;
     text-align: center;
 }
 
@@ -57,7 +59,7 @@ body{
     }
 
     > div:first-child {
-        font-size: 3em;
+        font-size: 3.5em;
     }
 }
 
@@ -99,7 +101,7 @@ button{
 
 .btn-primary{
     background-color: cadetblue;
-    font-size: 1.1em;
+    font-size: 2.1em;
 }
 
 .totalHours{

@@ -38,9 +38,9 @@ export default class EmployeeView extends React.Component {
 			 			<div className="montViewWrapper">
 			 				<div>{revenue.allBillableHours + "h"}</div>
 			 				<div>
-			 				    <div>Revenue: {revenue.revenue}</div>
-			 				    <div>Prognosis: {revenue.prognosis}</div>
-			 				    <div>Utilization: {revenue.utilization}</div>
+			 				    <div>Revenue: {revenue.revenue}kr</div>
+			 				    <div>Prognosis: {revenue.prognosis}kr</div>
+			 				    <div>Utilization: {revenue.utilization}%</div>
 			 			    </div>
 
 			 			</div>
