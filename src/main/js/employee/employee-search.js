@@ -20,9 +20,12 @@ export default class EmployeeSearch extends React.Component {
 
 	render(){
 		return (
-			<div className="employeeSearchWrapper">
-				<input type="text" placeholder="52000..." className="employeeInput" onChange={this.updateEmployeeNumber}/>
-				<button className="btn-primary" onClick={this.buttonClicked}>Hent timer</button>
+		    <div>
+		        <div className="mtHeader">MineTimer</div>
+			    <div className="employeeSearchWrapper">
+				    <input type="text" placeholder="52000..." className="employeeInput" onChange={this.updateEmployeeNumber}/>
+				    <button className="btn-primary" onClick={this.buttonClicked}>Hent timer</button>
+			    </div>
 			</div>
 			)
 	}

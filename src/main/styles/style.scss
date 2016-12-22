@@ -9,10 +9,12 @@ body{
  a {
     cursor: pointer;
     display: block;
+    text-transform: capitalize;
  }
 }
 
 .mtHeader{
+    margin: 15px;
     text-align: center;
     font-size: 4em;
     color: purple;
@@ -40,12 +42,28 @@ body{
     .panel-default{
         border-radius: 0;
     }
+}
 
+.montViewWrapper{
+    display: flex;
+    justify-content: space-between;
+
+    div{
+        align-self: center;
+    }
+
+    > div:first-child {
+        font-size: 3em;
+    }
 }
 
 
 .totalRevenue{
     float: right;
+}
+
+.employeeSearchWrapper{
+    margin-top: 40px;
 }
 
 button{
@@ -72,6 +90,11 @@ button{
 }
 
 .btn-primary{
-    background-color: blue;
+    background-color: cadetblue;
     font-size: 1.1em;
+}
+
+.totalHours{
+    text-align: center;
+    font-size: 3.5em;
 }

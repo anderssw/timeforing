@@ -1,14 +1,15 @@
 import React from 'react';
 import EmployeeSummaryRow from './employee-summary-row'
+import "isomorphic-fetch"
+
 var PanelGroup = require('react-bootstrap').PanelGroup;
 var Panel = require('react-bootstrap').Panel;
-
 
 export default class EmployeeView extends React.Component {
 
 	constructor(){
 		super();
-		this.state = {employee: {revenuesForCurrentYear: []}}
+		this.state = {employee: {revenuesForCurrentYear: [], aggregatesForCurrentYear: {}}}
 		this.getEmployeeData = this.getEmployeeData.bind(this);
 	}
 
@@ -32,14 +33,16 @@ export default class EmployeeView extends React.Component {
 			<div className = "employeeView">
 			    <EmployeeSummaryRow employee={this.state.employee}></EmployeeSummaryRow>
 			 <PanelGroup defaultActiveKey="2" accordion>
-			 	{this.state.employee.revenuesForCurrentYear.map((revenue, index) => {
-			 		return <Panel eventKey={revenue.month} key={revenue.month} header={revenue.month}>
-			 			<div>
-			 				<div>Fakturerbare timer hos kunde: {revenue.customerBillableHours}</div>
-			 				<div>Alle fakturerbare timer: {revenue.allBillableHours}</div>
-			 				<div>Omsetning: {revenue.revenue}</div>
-			 				<div>Prognose: {revenue.prognosis}</div>
-			 				<div>Faktureringsgrad: {revenue.utilization}</div>
+			 	{this.state.employee.revenuesForCurrentYear.map((revenue) => {
+			 		return <Panel eventKey={revenue.month} key={revenue.month} header={revenue.month.toLowerCase()}>
+			 			<div className="montViewWrapper">
+			 				<div>{revenue.allBillableHours + "h"}</div>
+			 				<div>
+			 				    <div>Revenue: {revenue.revenue}</div>
+			 				    <div>Prognose: {revenue.prognosis}</div>
+			 				    <div>Utilization: {revenue.utilization}</div>
+			 			    </div>
+
 			 			</div>
 			 		</Panel>
 			 		})
