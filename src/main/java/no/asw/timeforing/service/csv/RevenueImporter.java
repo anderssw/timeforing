@@ -2,7 +2,6 @@ package no.asw.timeforing.service.csv;
 
 import no.asw.timeforing.domain.Employee;
 import no.asw.timeforing.domain.Revenue;
-import no.asw.timeforing.domain.csv.ProjectLine;
 import no.asw.timeforing.domain.csv.RevenueLine;
 import no.asw.timeforing.repository.EmployeeRepository;
 import no.asw.timeforing.utils.FilenameUtil;
@@ -32,7 +31,7 @@ public class RevenueImporter extends AbstractImporter<RevenueLine> {
         }
 
         Month month = FilenameUtil.getMonthFromFileName(path.getFileName());
-        Year year = FilenameUtil.getYearFromFileName(path);
+        Year year = FilenameUtil.getYearFromFilePath(path);
 
         revenueLines.forEach(line -> updateEmployee(line, year, month));
         return false;

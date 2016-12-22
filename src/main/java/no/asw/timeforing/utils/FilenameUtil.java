@@ -13,7 +13,7 @@ public class FilenameUtil {
         return Month.valueOf(month);
     }
 
-    public static Year getYearFromFileName(Path fileName) {
+    public static Year getYearFromFilePath(Path fileName) {
         String[] paths = fileName.toString().split(Pattern.quote(File.separator));
         String year = paths[paths.length - 2];
         return Year.of(Integer.parseInt(year));

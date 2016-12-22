@@ -1,5 +1,6 @@
 package no.asw.timeforing.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import no.asw.timeforing.domain.csv.ProjectLine;
 import no.asw.timeforing.domain.csv.RevenueLine;
 
@@ -40,6 +41,15 @@ public class Revenue implements Comparable<Revenue>{
         return revenue;
     }
 
+    @JsonIgnore
+    public Double getRevenueAsDouble() {
+        try {
+            return Double.parseDouble(revenue.replace(" ", "").trim());
+        } catch (Exception e) {
+            return 0.;
+        }
+    }
+
     public String getPrognosis() {
         return prognosis;
     }
@@ -71,5 +81,9 @@ public class Revenue implements Comparable<Revenue>{
     @Override
     public int compareTo(Revenue other) {
         return other.getMonth().compareTo(getMonth());
+    }
+
+    public void setMonth(Month month) {
+        this.month = month;
     }
 }
