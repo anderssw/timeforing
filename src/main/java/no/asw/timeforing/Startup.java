@@ -32,7 +32,7 @@ public class Startup {
 
     Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @PostConstruct
+    //@PostConstruct
     public void init() throws URISyntaxException, IOException {
         //employeeRepository.deleteAll();
 
